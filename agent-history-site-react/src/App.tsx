@@ -1,49 +1,108 @@
 import { agents, frameworks, standards, benchmarks } from './data/agents'
 
 function App() {
+  const currentDate = new Date().toISOString().split('T')[0]
+  const lastUpdated = '2025-02-04'
+  
   return (
-    <div className="app">
+    <div className="app flicker">
       {/* Terminal Header */}
       <header className="terminal-header">
-        <div className="terminal-dots">
-          <span className="terminal-dot dot-red"></span>
-          <span className="terminal-dot dot-yellow"></span>
-          <span className="terminal-dot dot-green"></span>
+        {/* Window Controls */}
+        <div className="terminal-controls">
+          <div className="terminal-dots">
+            <span className="terminal-dot dot-red" title="Close"></span>
+            <span className="terminal-dot dot-yellow" title="Minimize"></span>
+            <span className="terminal-dot dot-green" title="Maximize"></span>
+          </div>
+          <span className="terminal-title">Terminal — bash — 120×40</span>
         </div>
-        <span className="terminal-title">agent-history-site-react — 2022-2025</span>
-        <span className="prompt">user@localhost:~$</span>
+        
+        {/* Tab Bar */}
+        <div className="terminal-tabs">
+          <div className="terminal-tab active">
+            <span className="terminal-tab-icon">📄</span>
+            AI_AGENTS_HISTORY.md
+            <span className="terminal-tab-close">×</span>
+          </div>
+          <div className="terminal-tab">
+            <span className="terminal-tab-icon">📁</span>
+            timeline/
+          </div>
+          <div className="terminal-tab">
+            <span className="terminal-tab-icon">⚙️</span>
+            config
+          </div>
+        </div>
+        
+        {/* Breadcrumb */}
+        <div className="terminal-breadcrumb">
+          <span className="breadcrumb-user">user</span>
+          <span className="breadcrumb-at">@</span>
+          <span className="breadcrumb-host">localhost</span>
+          <span className="breadcrumb-at">:</span>
+          <span className="breadcrumb-path">~/agent-history-site-react</span>
+          <span className="breadcrumb-prompt">$</span>
+          <span className="cursor-line"></span>
+        </div>
       </header>
 
       {/* Hero Section */}
       <section className="hero">
         <div className="container">
-          <pre>
-{`    ____                      _            __  ___      __    _      __
-   / __ \\____  ___  ____     (_)__  _____/  |/  /____ / /   (_)____/ /_
-  / /_/ / __ \\/ _ \\/ __ \\   / / _ \\/ ___/ /|_/ // __ \\  / |/|/ __/ __/
- / _, _/ /_/ /  __/ / / /  / /  __(__  ) /  / / /_/ / /|  |/ /_/ /_
-/_/ |_|\____/\\___/_/ /_/  /_/\\___/____/_/|_|/\\____/_/ |_|_|\\__/\\__/`}
-          </pre>
-          <h1 className="hero-title">$ ./ai-agents-history.sh --timeline=2022-2025</h1>
-          <p style={{ color: 'var(--text-secondary)', marginBottom: '1rem' }}>
-            &gt; 探索 AI Agent 技术从框架到自主智能的演进之路
+          <div className="ascii-art-container">
+            <pre className="ascii-art">
+{`
+    █████╗  ██████╗ ███████╗███╗   ██╗████████╗███████╗
+   ██╔══██╗██╔════╝ ██╔════╝████╗  ██║╚══██╔══╝██╔════╝
+   ███████║██║  ███╗█████╗  ██╔██╗ ██║   ██║   ███████╗
+   ██╔══██║██║   ██║██╔══╝  ██║╚██╗██║   ██║   ╚════██║
+   ██║  ██║╚██████╔╝███████╗██║ ╚████║   ██║   ███████║
+   ╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚══════╝
+   
+   ██╗  ██╗██╗███████╗████████╗ ██████╗ ██████╗ ██╗   ██╗
+   ██║  ██║██║██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗╚██╗ ██╔╝
+   ███████║██║███████╗   ██║   ██║   ██║██████╔╝ ╚████╔╝ 
+   ██╔══██║██║╚════██║   ██║   ██║   ██║██╔══██╗  ╚██╔╝  
+   ██║  ██║██║███████║   ██║   ╚██████╔╝██║  ██║   ██║   
+   ╚═╝  ╚═╝╚═╝╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝   ╚═╝   
+`}
+            </pre>
+          </div>
+          
+          <div className="hero-command">
+            <span className="prompt-symbol">$</span>
+            <span className="command-text">./ai-agents-history.sh</span>
+            <span className="command-args">--timeline=2022-2025</span>
+            <span className="cursor"></span>
+          </div>
+          
+          <p className="hero-desc typing-text">
+            探索 AI Agent 技术从框架到自主智能的演进之路
           </p>
           
+          <div className="hero-output">
+            [INFO] Loading timeline data... Done.
+          </div>
+          <div className="hero-output">
+            [INFO] Parsing {agents.length} agent milestones... Done.
+          </div>
+          
           <div className="hero-stats">
-            <div className="stat-item">
+            <div className="stat-item fade-in stagger-1">
               <div className="stat-value">18+</div>
               <div className="stat-label">Milestone Projects</div>
             </div>
-            <div className="stat-item">
+            <div className="stat-item fade-in stagger-2">
               <div className="stat-value">4</div>
               <div className="stat-label">Years (2022-2025)</div>
             </div>
-            <div className="stat-item">
-              <div className="stat-value">6</div>
+            <div className="stat-item fade-in stagger-3">
+              <div className="stat-value">{frameworks.length}</div>
               <div className="stat-label">Key Frameworks</div>
             </div>
-            <div className="stat-item">
-              <div className="stat-value">4</div>
+            <div className="stat-item fade-in stagger-4">
+              <div className="stat-value">{standards.length}</div>
               <div className="stat-label">Industry Standards</div>
             </div>
           </div>
@@ -56,36 +115,36 @@ function App() {
           <div className="section-header">
             <span className="section-number">01</span>
             <h2 className="section-title">[TIMELINE] AI Agent Evolution</h2>
+            <span className="section-marker">// chronological view</span>
           </div>
           
           <div className="command-bar">
             <span className="prompt">$</span>
-            <span className="command">grep -n "milestone" timeline.json | head -20</span>
+            <span className="command">grep -n "milestone" timeline.json</span>
+            <span className="pipe">|</span>
+            <span className="command">head -20</span>
+            <span className="cursor-line"></span>
           </div>
           
           <div className="timeline">
-            {/* Group by year */}
             {[2022, 2023, 2024, 2025].map(year => {
               const yearAgents = agents.filter(a => a.year === year)
               if (yearAgents.length === 0) return null
               
               return (
                 <div key={year}>
-                  <h3 style={{ 
-                    color: 'var(--text-dim)', 
-                    fontSize: '0.85rem', 
-                    margin: '1.5rem 0 1rem 0',
-                    paddingLeft: '1rem'
-                  }}>
-                    === {year} ===
-                  </h3>
+                  <h3 className="timeline-year">{year}</h3>
                   {yearAgents.map((agent, idx) => (
-                    <div key={agent.name} className="timeline-item fade-in" style={{ animationDelay: `${idx * 0.1}s` }}>
+                    <div 
+                      key={agent.name} 
+                      className="timeline-item" 
+                      style={{ animationDelay: `${idx * 0.15}s` }}
+                    >
                       <div className="timeline-date">{agent.date}</div>
                       <div className="timeline-content">
                         <div className="timeline-name">{agent.name}</div>
                         <div className="timeline-desc">{agent.description}</div>
-                        <div className="timeline-significance">→ {agent.significance}</div>
+                        <div className="timeline-significance">{agent.significance}</div>
                       </div>
                     </div>
                   ))}
@@ -102,16 +161,20 @@ function App() {
           <div className="section-header">
             <span className="section-number">02</span>
             <h2 className="section-title">[GRID] Agent Frameworks</h2>
+            <span className="section-marker">// development tools</span>
           </div>
           
           <div className="command-bar">
             <span className="prompt">$</span>
-            <span className="command">ls -la frameworks/ | grep -E "^d"</span>
+            <span className="command">ls -la frameworks/</span>
+            <span className="pipe">|</span>
+            <span className="command">grep -E "^d"</span>
+            <span className="cursor-line"></span>
           </div>
           
           <div className="grid-3">
-            {frameworks.map(fw => (
-              <div key={fw.name} className="card fade-in">
+            {frameworks.map((fw, idx) => (
+              <div key={fw.name} className={`card fade-in stagger-${(idx % 6) + 1}`}>
                 <div className="card-header">
                   <span className="card-name">{fw.name}</span>
                   <span className="card-badge">{fw.team}</span>
@@ -128,29 +191,33 @@ function App() {
         <div className="container">
           <div className="section-header">
             <span className="section-number">03</span>
-            <h2 className="section-title">[TABLE] Early Open Source Agents (2023)</h2>
+            <h2 className="section-title">[TABLE] Early Open Source Agents</h2>
+            <span className="section-marker">// 2023 pioneers</span>
           </div>
           
           <div className="command-bar">
             <span className="prompt">$</span>
             <span className="command">cat early-agents.csv</span>
+            <span className="pipe">|</span>
+            <span className="command">column -t -s ','</span>
+            <span className="cursor-line"></span>
           </div>
           
-          <div className="table-container">
+          <div className="table-container fade-in">
             <table>
               <thead>
                 <tr>
-                  <th>Time</th>
-                  <th>Project</th>
-                  <th>Significance</th>
+                  <th>TIME</th>
+                  <th>PROJECT</th>
+                  <th>SIGNIFICANCE</th>
                 </tr>
               </thead>
               <tbody>
-                <tr><td>2023.04</td><td>AutoGPT</td><td>首个开源自主 Agent，演示目标分解与自我迭代</td></tr>
-                <tr><td>2023.05</td><td>LangChain</td><td>开源框架，统一 LLM 应用开发范式</td></tr>
-                <tr><td>2023.07</td><td>AgentGPT</td><td>浏览器端运行，自称目标即可生成任务</td></tr>
-                <tr><td>2023.08</td><td>SuperAGI</td><td>开源 Agent 框架，支持多 Agent 管理</td></tr>
-                <tr><td>2023.10</td><td>AutoGen</td><td>微软开源，多 Agent 协作框架</td></tr>
+                <tr><td>2023.04</td><td><strong>AutoGPT</strong></td><td>首个开源自主 Agent，演示目标分解与自我迭代</td></tr>
+                <tr><td>2023.05</td><td><strong>LangChain</strong></td><td>开源框架，统一 LLM 应用开发范式</td></tr>
+                <tr><td>2023.07</td><td><strong>AgentGPT</strong></td><td>浏览器端运行，自称目标即可生成任务</td></tr>
+                <tr><td>2023.08</td><td><strong>SuperAGI</strong></td><td>开源 Agent 框架，支持多 Agent 管理</td></tr>
+                <tr><td>2023.10</td><td><strong>AutoGen</strong></td><td>微软开源，多 Agent 协作框架</td></tr>
               </tbody>
             </table>
           </div>
@@ -162,12 +229,16 @@ function App() {
         <div className="container">
           <div className="section-header">
             <span className="section-number">04</span>
-            <h2 className="section-title">[GRID] Programming Agents (2024-2025)</h2>
+            <h2 className="section-title">[GRID] Programming Agents</h2>
+            <span className="section-marker">// 2024-2025</span>
           </div>
           
           <div className="command-bar">
             <span className="prompt">$</span>
-            <span className="command">find . -name "*agent*" -type f | grep -E "(SWE|Code|Hands)"</span>
+            <span className="command">find . -name "*agent*" -type f</span>
+            <span className="pipe">|</span>
+            <span className="command">grep -E "(SWE|Code|Hands)"</span>
+            <span className="cursor-line"></span>
           </div>
           
           <div className="grid-4">
@@ -178,8 +249,8 @@ function App() {
               { name: 'OpenCode', date: '2025', desc: '微软开源编程 Agent' },
               { name: 'Aider', date: '2023', desc: '轻量级结对编程' },
               { name: 'Cursor Agent', date: '2024', desc: '商业化 AI IDE' },
-            ].map(agent => (
-              <div key={agent.name} className="card fade-in">
+            ].map((agent, idx) => (
+              <div key={agent.name} className={`card fade-in stagger-${(idx % 6) + 1}`}>
                 <div className="card-header">
                   <span className="card-name">{agent.name}</span>
                   <span className="card-badge">{agent.date}</span>
@@ -197,21 +268,23 @@ function App() {
           <div className="section-header">
             <span className="section-number">05</span>
             <h2 className="section-title">[TABLE] Protocol Standards</h2>
+            <span className="section-marker">// interoperability</span>
           </div>
           
           <div className="command-bar">
             <span className="prompt">$</span>
-            <span className="command">cat protocols.json</span>
+            <span className="command">jq '.protocols[]' standards.json</span>
+            <span className="cursor-line"></span>
           </div>
           
-          <div className="table-container">
+          <div className="table-container fade-in">
             <table>
               <thead>
                 <tr>
-                  <th>Protocol</th>
-                  <th>Organization</th>
-                  <th>Year</th>
-                  <th>Purpose</th>
+                  <th>PROTOCOL</th>
+                  <th>ORGANIZATION</th>
+                  <th>YEAR</th>
+                  <th>PURPOSE</th>
                 </tr>
               </thead>
               <tbody>
@@ -235,18 +308,20 @@ function App() {
           <div className="section-header">
             <span className="section-number">06</span>
             <h2 className="section-title">[TABLE] Evaluation Benchmarks</h2>
+            <span className="section-marker">// metrics & testing</span>
           </div>
           
           <div className="command-bar">
             <span className="prompt">$</span>
-            <span className="command">python evaluate.py --benchmarks=all</span>
+            <span className="command">python evaluate.py --benchmarks=all --format=table</span>
+            <span className="cursor-line"></span>
           </div>
           
           <div className="grid-2">
-            <div className="table-container">
+            <div className="table-container fade-in stagger-1">
               <table>
                 <thead>
-                  <tr><th>Benchmark</th><th>Organization</th><th>Domain</th></tr>
+                  <tr><th>BENCHMARK</th><th>ORG</th><th>DOMAIN</th></tr>
                 </thead>
                 <tbody>
                   {benchmarks.slice(0, 4).map(b => (
@@ -259,10 +334,10 @@ function App() {
                 </tbody>
               </table>
             </div>
-            <div className="table-container">
+            <div className="table-container fade-in stagger-2">
               <table>
                 <thead>
-                  <tr><th>Benchmark</th><th>Organization</th><th>Domain</th></tr>
+                  <tr><th>BENCHMARK</th><th>ORG</th><th>DOMAIN</th></tr>
                 </thead>
                 <tbody>
                   {benchmarks.slice(4).map(b => (
@@ -281,16 +356,46 @@ function App() {
 
       {/* Footer */}
       <footer className="footer">
-        <pre style={{ marginBottom: '1rem' }}>
-{`    _    ___  __    _   _ ____   ___  ____  
-   | |  / _ \\|  |  | | | |  _ \\ / _ \\|  _ \\ 
-   | |_| |_| | |_| | |_| | | | | |_| | | | |
-   |_| |_||_| |_| |_| |_| |_| |_| |_| |_|`}
+        <pre className="footer-ascii">
+{`╔════════════════════════════════════════════════════════════════╗
+║  █████╗ ██╗    █████╗  ██████╗ ███████╗███╗   ██╗████████╗███████╗  ║
+║ ██╔══██╗██║   ██╔══██╗██╔════╝ ██╔════╝████╗  ██║╚══██╔══╝██╔════╝  ║
+║ ███████║██║   ███████║██║  ███╗█████╗  ██╔██╗ ██║   ██║   ███████╗  ║
+║ ██╔══██║██║   ██╔══██║██║   ██║██╔══╝  ██║╚██╗██║   ██║   ╚════██║  ║
+║ ██║  ██║██║   ██║  ██║╚██████╔╝███████╗██║ ╚████║   ██║   ███████║  ║
+║ ╚═╝  ╚═╝╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚══════╝  ║
+╚════════════════════════════════════════════════════════════════╝`}
         </pre>
-        <p>AI Agents 正在重新定义人机协作的边界</p>
-        <p style={{ marginTop: '0.5rem' }}>
-          <span style={{ color: 'var(--text-primary)' }}>$</span> echo "Built with React + Terminal Style"
-        </p>
+        
+        <div className="footer-content">
+          <p className="footer-tagline">
+            AI Agents 正在重新定义人机协作的边界
+          </p>
+          
+          <div className="footer-command">
+            <span className="prompt">$</span>
+            <span className="cmd">echo</span>
+            <span className="string">"Built with React + Terminal Style"</span>
+            <span className="cursor-line"></span>
+          </div>
+          
+          <div className="footer-status">
+            <div className="footer-status-item">
+              <span className="status-indicator"></span>
+              <span>System Online</span>
+            </div>
+            <div className="footer-status-item">
+              <span>PID: 42069</span>
+            </div>
+            <div className="footer-status-item">
+              <span>TTY: pts/0</span>
+            </div>
+          </div>
+          
+          <div className="footer-timestamp">
+            Last Updated: {lastUpdated} | Session: {currentDate}
+          </div>
+        </div>
       </footer>
     </div>
   )
