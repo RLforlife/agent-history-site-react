@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "clawdbot": {
+      "command": "node",
+      "args": ["/Users/wtfmac/clawd/mcp/clawdbot-server.cjs"],
+      "env": {}
+    }
+  }
+}
